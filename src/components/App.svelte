@@ -13,6 +13,7 @@
 	let selectedCrime = "ASSAULT";
 	let selectedMonth = "02"; 
 	let selectedYear = "2024";
+	let showWriteUp = true;
   
 	let csvData;
   
@@ -179,13 +180,30 @@
 	</div>
 
 	<div id = "writeup" >
-		<h2>Write Up</h2>
+		{#if showWriteUp}
+		<div id = "writeup-text">
+		<h2>Crime in San Diego (Aug 2023 - Feb 2024)</h2>
 		<p>
-			- A rationale for your design decisions. How did you choose your particular visual encodings and interaction techniques? What alternatives did you consider and how did you arrive at your ultimate choices?
+			- In the visualization, we decided to encode the location of every crime within San Diego as the point's position on the map. 
+			We wanted to allow users to explore where different crimes occured so we added an interactive map where the user can pan and scroll.
+			We also wanted to allow exploration of particular categories of crimes, so we encoded a crime's category as its color.
+			We allowed users to filter the data by the crime category, month, and year so that they can see the difference in frequency and location of crimes.
+			As well, we added an interactive click that shows certain information for each data point like the department that recorded the crime, the exact date and time, and the crime description.	 
+			We tried alternative encodings like displaying all types of crime at once isntead of allowing the data to be filtered, but that caused the website to not load.
+			We also discussed grouping and aggregating the data, but we decided that we wanted to show the individual locations of crimes so people could see a more granular view.
+			However, we decided to go with our final encodings because they were visually clean and did not obfuscate the data.
 		</p>
 		<p>	
-			- An overview of your development process. Describe how the work was split among the team members. Include a commentary on the development process, including answers to the following questions: Roughly how much time did you spend developing your application (in people-hours)? What aspects took the most time?
+			- To develop this project, we first had to acquire the data.
+			We got the data from <a href='https://opendata.sandag.org/stories/s/ARJIS-Crime-Statistics-Portal-CTR/d68e-mi6t/' target='_blank'>opendata.sandag.org</a> - a public data portal.
+			Then, we split the work into parsing the data and loading the points. We had to parse the data so that it could be used by mapbox.
+			We also created ui elements and functions that filtered the data. Finally, we had to deploy the project on github pages. 
+			Overall, we spent about 20 person-hours creating this project. 
+			The most time-intensive parts were debugging the ui elements and deploying the project on github.
 		</p>
+		</div>
+		{/if}
+		<button on:click={() => {showWriteUp = !showWriteUp}}>Toggle Info</button>
 	</div>
   </main>
   
@@ -241,13 +259,21 @@
 		background-color: rgba(255, 255, 255, 0.4);
 		position: absolute;
 		margin: auto;
-		min-width: 250px;
-		width: 15%;
-		bottom: 10px; /* Adjust this value as needed */
+		/* min-width: 250px;
+		width: ; */
+		max-width: 400px;
+		bottom: 30px; /* Adjust this value as needed */
 		left: 10px;   /* Adjust this value as needed */
 		padding: 10px;
 		z-index: 3;
+		float:  left;
+		clear: left;
 	}
+	#writeup-text {
+	max-height: 200px;
+	overflow-y:auto;
+}
+
   </style>
 
   

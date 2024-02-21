@@ -38,7 +38,7 @@
   
 	async function fetchData() {
 		try {
-			let csv_data = await d3.csv('../ARJIS_Public_Crime_Data_w__Day_of_Week_20240215.csv');
+			let csv_data = await d3.csv('ARJIS_Public_Crime_Data_w__Day_of_Week_20240215.csv');
 			return csv_data
 			.filter(row => {
           		return row.geometry && row.geometry.match(/POINT \((-?\d+\.\d+) (-?\d+\.\d+)\)/);
